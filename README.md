@@ -11,6 +11,7 @@
  O código está todo comentado para facilitar a compreensão das lógicas que utilizei.
 
  
+ 
 ### O jogo possui 3 possibilidades de fim:
 
  Caso um: Para isso deverá haver uma linha, coluna, ou diagonal totalmente preenchida com o número 1. 
@@ -20,6 +21,7 @@
  Empate : Ocorre se nenhuma das condições anteriores forem atendidas e se todas as posições da matriz estiverem preenchidas com 1 ou 2.
 
 
+
 ### O jogo possui 2 modos: 
 
 Modo battle: trata-se de um modo que jogam o usuário e o própria máquina. Neste modo, o usuário pode escolher qualquer posição do tabuleiro que desejar. Já as posições do programa são escolhidas aleatóriamente para tentar impedir que o usuário vença.
@@ -27,6 +29,7 @@ Modo battle: trata-se de um modo que jogam o usuário e o própria máquina. Nes
 Modo local: trata-se de um modo onde dois usuários podem jogar localmente no mesmo computador, escolhendo livremente as posições que jogam. Possui os mesmos métodos de verificação de vitória do modo de jogo anterior.
 
 O programa dá a opção do usuário alternar entre os modos de jogo durante a execução do programa, ao fim de cada rodada. Desta forma pode ser jogado de todas as formas possíveis com uma só execução, ou seja, não é necessário reiniciar o programa para jogar outro modo, 
+
 
 
 ### Planejamentos futuros para o projeto:
