@@ -1,6 +1,7 @@
 import random
 
 
+## Função que gera a matriz inicial do jogo, com todas as posições preenchidas com 0.
 def GerarMatriz():
 
     linha = [0] * 3
@@ -40,18 +41,15 @@ def JogadaMaquina(m, l, c):
         m_coluna = round(random.random() * 2)
 
         limitador += 1
-        if limitador > 9:
+        if limitador > 19:
             break
 
-    if limitador != 10:
+    if limitador != 20:
         m[m_linha][m_coluna] = 2
-
-    for i in range(0, 3, 1):
-        print(m[i])
 
     return m
 
-
+## Função que verifica se a posição escolhida pelo jogador já está preenchida.
 def VerificarPosicao(m, l, c):
 
     while m[l][c] == 2 or m[l][c] == 1:
@@ -61,6 +59,16 @@ def VerificarPosicao(m, l, c):
             (l, c) = Pergunta()
 
     return l, c
+
+
+def VerificaResultado(m, resultado, diagonal1_j, diagonal2_j, diagonal1_m, diagonal2_m):
+
+    resultado[0] = VerificarHorizontal(m)
+    resultado[1] = VerificarVertical(m)
+    resultado[2] = VerificaDiagonal(m, diagonal1_j, diagonal2_j, diagonal1_m, diagonal2_m)
+    resultado[3] = VerificaEmpate(m)
+
+    return resultado
 
 
 ## Função que verifica se há algum caso de vitória de algum jogador nas horizontais da matriz.
@@ -78,11 +86,11 @@ def VerificarHorizontal(m):
                 horizontal_m += 1
 
         if horizontal_j > 2:
-            resultado = "jogador"
+            resultado = "um"
             return resultado
 
         elif horizontal_m > 2:
-            resultado = "maquina"
+            resultado = "dois"
             return resultado
 
         horizontal_j = 0
@@ -104,11 +112,11 @@ def VerificarVertical(m):
                 vertical_m += 1
 
         if vertical_j > 2:
-            resultado = "jogador"
+            resultado = "um"
             return resultado
 
         elif vertical_m > 2:
-            resultado = "maquina"
+            resultado = "dois"
             return resultado
 
         vertical_j = 0
@@ -137,11 +145,11 @@ def VerificaDiagonal(m, diagonal1_j, diagonal2_j, diagonal1_m, diagonal2_m):
                     diagonal2_m += 1
 
     if diagonal1_j > 2 or diagonal2_j > 2:
-        resultado = "jogador"
+        resultado = "um"
         return resultado
 
     elif diagonal1_m > 2 or diagonal2_m > 2:
-        resultado = "maquina"
+        resultado = "dois"
         return resultado
 
 
@@ -158,3 +166,9 @@ def VerificaEmpate(m):
     if cont == 0:
         resultado = 'empate'
         return resultado
+
+
+def ImprimirMatriz(m):
+
+    for i in range(0, 3, 1):
+        print(m[i])
