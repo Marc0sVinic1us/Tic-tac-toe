@@ -6,7 +6,9 @@
  
  Há também algumas limitações no código, por exemplo, o programa impossibilita que o jogador insira uma posição fora do tabuleiro para não ocorrer erro de posição fora de limites da matriz. Bem também como, não possibilita que o jogador ou a máquina escolha uma posição que já foi preenchida anteriomente por ambos, desta forma não há chances de forçar uma vitória. 
 
- Outra funcionalidade é que o programa dá a opção do usuário jogar quantas vezes quiser sem ter que reinicia-lo.
+ Outra funcionalidade é que o programa dá a opção do usuário jogar quantas vezes quiser sem ter que reinicia-lo. 
+ Além também de mostrar o placar do jogo, ou seja, quantas rodadas cada jogador já venceu.
+ Ao fim, imprime o resultado final, ou seja, informa qual jogador venceu mais rodadas em seu determinado modo de jogo.
 
  O código está todo comentado para facilitar a compreensão das lógicas que utilizei.
 
@@ -18,7 +20,7 @@
 
  Caso dois: Análoga à anterior, porém com os espaços preenchidas pelo número 2. 
 
- Empate : Ocorre se nenhuma das condições anteriores forem atendidas e se todas as posições da matriz estiverem preenchidas com 1 ou 2.
+ Empate: Ocorre se nenhuma das condições anteriores forem atendidas e se todas as posições da matriz estiverem preenchidas com 1 ou 2.
 
 
 

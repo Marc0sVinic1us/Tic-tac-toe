@@ -1,7 +1,7 @@
 import random
 
 
-## Função que gera a matriz inicial do jogo, com todas as posições preenchidas com 0.
+# Função que gera a matriz inicial do jogo, com todas as posições preenchidas com 0.
 def GerarMatriz():
 
     linha = [0] * 3
@@ -21,6 +21,16 @@ def GerarMatriz():
     return matriz
 
 
+# Função que determina a quantidade de vitórias dos jogadores ao fim de cada rodada.
+def Placar(pontuacoes):
+
+    print('\nPlacar:\n' +
+          'Jogador um: ', pontuacoes[0])
+    print('Jogador dois: ', pontuacoes[1])
+    print('Empates: ', pontuacoes[2], '\n')
+
+
+# Função que armaneza as coordenadas da posição a ser preenchida, inseridas pelo jogador.
 def Pergunta():
     l = int(input("Digite a coordenada da linha: "))
     c = int(input("Digite a coordenada da coluna: "))
@@ -28,7 +38,8 @@ def Pergunta():
     return l, c
 
 
-## Função que sorteia uma coordenada alatória para jogada da máquina, porém, que impossiblita que a coordenada sorteada já tenha sido jogada anteriomente.
+# Função que sorteia uma coordenada aleatória para jogada da máquina, porém, que impossibilita que a coordenada
+# sorteada já tenha sido jogada anteriormente.
 def JogadaMaquina(m, l, c):
     limitador = 0
 
@@ -49,7 +60,8 @@ def JogadaMaquina(m, l, c):
 
     return m
 
-## Função que verifica se a posição escolhida pelo jogador já está preenchida.
+
+# Função que verifica se a posição escolhida pelo jogador já está preenchida.
 def VerificarPosicao(m, l, c):
 
     while m[l][c] == 2 or m[l][c] == 1:
@@ -71,7 +83,7 @@ def VerificaResultado(m, resultado, diagonal1_j, diagonal2_j, diagonal1_m, diago
     return resultado
 
 
-## Função que verifica se há algum caso de vitória de algum jogador nas horizontais da matriz.
+# Função que verifica se há algum caso de vitória de algum jogador nas horizontais da matriz.
 def VerificarHorizontal(m):
     horizontal_j = 0
     horizontal_m = 0
@@ -97,7 +109,7 @@ def VerificarHorizontal(m):
         horizontal_m = 0
 
 
-## Função que verifica se há algum caso de vitória de algum jogador nas verticais da matriz.
+# Função que verifica se há algum caso de vitória de algum jogador nas verticais da matriz.
 def VerificarVertical(m):
     vertical_j = 0
     vertical_m = 0
@@ -123,7 +135,7 @@ def VerificarVertical(m):
         vertical_m = 0
 
 
-## Função que verifica se há algum caso de vitória de algum jogador nas diagonais da matriz.
+# Função que verifica se há algum caso de vitória de algum jogador nas diagonais da matriz.
 def VerificaDiagonal(m, diagonal1_j, diagonal2_j, diagonal1_m, diagonal2_m):
     for i in range(0, 3, 1):
         for j in range(0, 3, 1):
@@ -153,7 +165,7 @@ def VerificaDiagonal(m, diagonal1_j, diagonal2_j, diagonal1_m, diagonal2_m):
         return resultado
 
 
-## Função que verifica se houve empate, ou seja, se todas as posições da matriz estão preenchidas e sem casos de vitória.
+# Função que verifica se houve empate, ou seja, se todas as posições da matriz estão preenchidas e sem casos de vitória.
 def VerificaEmpate(m):
     cont = 0
 
@@ -172,3 +184,4 @@ def ImprimirMatriz(m):
 
     for i in range(0, 3, 1):
         print(m[i])
+

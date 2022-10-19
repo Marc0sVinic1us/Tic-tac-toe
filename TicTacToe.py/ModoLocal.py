@@ -1,16 +1,20 @@
 from Funções import *
 
-## Modo Jogador 1 vs Jogador 2.
-def ModoLocal():
 
+# Modo Jogador 1 vs Jogador 2.
+def ModoLocal():
     print("\nModo local:\n" +
-        "Jogador 1: 1\n" +
-        "Jogador 2: 2\n")
+          "Jogador um: 1\n" +
+          "Jogador dois: 2\n")
 
     ans = 'S'
+    pontuacoes = [0, 0, 0]
 
-    ## Laço de repetição que permite que se jogue quantas vezes desejar.
+
+    # Laço de repetição que permite que se jogue quantas vezes desejar.
     while ans == 'S':
+
+        Placar(pontuacoes)
 
         m = GerarMatriz()
         resultado = ['', '', '', '']
@@ -22,11 +26,11 @@ def ModoLocal():
 
         print('\n')
 
-        ## Bloco de código para verificação se as coordenadas escolhidas estão fora dos limites da matriz (menor que 0 ou maior que 2).
-        ## Ou se estão livres, ou seja, se já não foram escolhidas anteriomente por um dos jogadores.
+        # Bloco de código para verificação se as coordenadas escolhidas estão fora dos limites da matriz (menor que 0
+        # ou maior que 2). Ou se estão livres, ou seja, se já não foram escolhidas anteriormente por um dos jogadores.
         while True:
 
-            ## Bloco de código para a escolha da posição do jogador 1.
+            # Bloco de código para a escolha da posição do jogador 1.
             print('Jogador 1:')
             (l1, c1) = Pergunta()
 
@@ -45,14 +49,14 @@ def ModoLocal():
             print('\n')
             ImprimirMatriz(m)
 
-            ## Bloco de código para verificação se o jogador 1 ganhou o jogo na rodada atual.
+            # Bloco de código para verificação se o jogador 1 ganhou o jogo na rodada atual.
             resultado = VerificaResultado(m, resultado, diagonal1_j, diagonal2_j, diagonal1_m, diagonal2_m)
             print("\n")
 
             if (resultado[0] or resultado[1] or resultado[2] or resultado[3]) is not None:
                 break
 
-            ## Bloco de código para a escolha da posição do jogador 2.
+            # Bloco de código para a escolha da posição do jogador 2.
             print('Jogador 2:')
             (l2, c2) = Pergunta()
 
@@ -71,23 +75,39 @@ def ModoLocal():
             print('\n')
             ImprimirMatriz(m)
 
-            ## Bloco de código para verificação se o jogador 2 ganhou o jogo na rodada atual.
+            # Bloco de código para verificação se o jogador 2 ganhou o jogo na rodada atual.
             resultado = VerificaResultado(m, resultado, diagonal1_j, diagonal2_j, diagonal1_m, diagonal2_m)
             print("\n")
 
             if (resultado[0] or resultado[1] or resultado[2] or resultado[3]) is not None:
                 break
 
-        print('FIM DE JOGO!\n')
+        print('\nFIM DE JOGO!\n')
 
-        if (resultado.__contains__('um')):
-            print('O jogador 1 venceu!')
+        if resultado.__contains__('um'):
+            print('Parabéns, você venceu a rodada!')
+            pontuacoes[0] += 1
 
-        elif (resultado.__contains__('dois')):
-            print('O jogador 2 venceu!')
-
+        elif resultado.__contains__('dois'):
+            print('Infelizmente você perdeu a rodada!')
+            pontuacoes[1] += 1
+            
         else:
             print('Deu velha!')
+            pontuacoes[2] += 1
 
-
+        
         ans = input('\nDeseja jogar novamente? (S/N)\n').upper()
+
+
+    # Bloco de código que exibe o resultado final de quem venceu mais rodadas.
+    print('\nRESULTADO FINAL:')
+
+    if pontuacoes[0] > pontuacoes[1]:
+        print('O jogador um venceu o jogo!\n')
+
+    elif pontuacoes[1] > pontuacoes[0]:
+        print('O jogador dois venceu o jogo!\n')
+    
+    else:
+        print('Houve um empate!')
