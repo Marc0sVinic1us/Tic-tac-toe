@@ -8,21 +8,25 @@ def ModoLocal():
           "Jogador dois: 2\n")
 
     ans = 'S'
-    pontuacoes = [0, 0, 0]
-
+    points = {
+        "vitoria": 0,
+        "derrota": 0,
+        "empate": 0
+    }
 
     # Laço de repetição que permite que se jogue quantas vezes desejar.
     while ans == 'S':
 
-        Placar(pontuacoes)
+        Placar(points)
 
         m = GerarMatriz()
-        resultado = ['', '', '', '']
 
-        diagonal1_j = 0
-        diagonal2_j = 0
-        diagonal1_m = 0
-        diagonal2_m = 0
+        resultado = {
+            "horizontal": "",
+            "vertical": "",
+            "diagonal": "",
+            "velha": "",
+        }
 
         print('\n')
 
@@ -50,10 +54,11 @@ def ModoLocal():
             ImprimirMatriz(m)
 
             # Bloco de código para verificação se o jogador 1 ganhou o jogo na rodada atual.
-            resultado = VerificaResultado(m, resultado, diagonal1_j, diagonal2_j, diagonal1_m, diagonal2_m)
+            resultado = VerificaResultado(m, resultado)
             print("\n")
 
-            if (resultado[0] or resultado[1] or resultado[2] or resultado[3]) is not None:
+            if Break(resultado) == "fim":
+                ImprimirMatriz(m)
                 break
 
             # Bloco de código para a escolha da posição do jogador 2.
@@ -76,38 +81,36 @@ def ModoLocal():
             ImprimirMatriz(m)
 
             # Bloco de código para verificação se o jogador 2 ganhou o jogo na rodada atual.
-            resultado = VerificaResultado(m, resultado, diagonal1_j, diagonal2_j, diagonal1_m, diagonal2_m)
+            resultado = VerificaResultado(m, resultado)
             print("\n")
 
-            if (resultado[0] or resultado[1] or resultado[2] or resultado[3]) is not None:
+            if Break(resultado) == "fim":
                 break
 
         print('\nFIM DE JOGO!\n')
 
-        if resultado.__contains__('um'):
-            print('Parabéns, você venceu a rodada!')
-            pontuacoes[0] += 1
+        if (list(resultado.values())).__contains__('um'):
+            print('O jogador um venceu a rodada!')
+            points["vitoria"] += 1
 
-        elif resultado.__contains__('dois'):
-            print('Infelizmente você perdeu a rodada!')
-            pontuacoes[1] += 1
-            
+        elif (list(resultado.values())).__contains__('dois'):
+            print('O jogador dois venceu a rodada!')
+            points["derrota"] += 1
+
         else:
             print('Deu velha!')
-            pontuacoes[2] += 1
+            points["empate"] += 1
 
-        
         ans = input('\nDeseja jogar novamente? (S/N)\n').upper()
-
 
     # Bloco de código que exibe o resultado final de quem venceu mais rodadas.
     print('\nRESULTADO FINAL:')
 
-    if pontuacoes[0] > pontuacoes[1]:
+    if points["vitoria"] > points["derrota"]:
         print('O jogador um venceu o jogo!\n')
 
-    elif pontuacoes[1] > pontuacoes[0]:
+    elif points["derrota"] > points["vitoria"]:
         print('O jogador dois venceu o jogo!\n')
-    
+
     else:
         print('Houve um empate!')

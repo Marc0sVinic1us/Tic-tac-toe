@@ -22,15 +22,15 @@ def GerarMatriz():
 
 
 # Função que determina a quantidade de vitórias dos jogadores ao fim de cada rodada.
-def Placar(pontuacoes):
+def Placar(points):
 
     print('\nPlacar:\n' +
-          'Jogador um: ', pontuacoes[0])
-    print('Jogador dois: ', pontuacoes[1])
-    print('Empates: ', pontuacoes[2], '\n')
+          'Jogador um: ', points["vitoria"])
+    print('Jogador dois: ', points["derrota"])
+    print('Empates: ', points["empate"], '\n')
 
 
-# Função que armaneza as coordenadas da posição a ser preenchida, inseridas pelo jogador.
+# Função que armazena as coordenadas da posição a ser preenchida, inseridas pelo jogador.
 def Pergunta():
     l = int(input("Digite a coordenada da linha: "))
     c = int(input("Digite a coordenada da coluna: "))
@@ -73,12 +73,12 @@ def VerificarPosicao(m, l, c):
     return l, c
 
 
-def VerificaResultado(m, resultado, diagonal1_j, diagonal2_j, diagonal1_m, diagonal2_m):
+def VerificaResultado(m, resultado):
 
-    resultado[0] = VerificarHorizontal(m)
-    resultado[1] = VerificarVertical(m)
-    resultado[2] = VerificaDiagonal(m, diagonal1_j, diagonal2_j, diagonal1_m, diagonal2_m)
-    resultado[3] = VerificaEmpate(m)
+    resultado["horizontal"] = VerificarHorizontal(m)
+    resultado["vertical"] = VerificarVertical(m)
+    resultado["diagonal"] = VerificaDiagonal(m)
+    resultado["velha"] = VerificaEmpate(m)
 
     return resultado
 
@@ -136,31 +136,40 @@ def VerificarVertical(m):
 
 
 # Função que verifica se há algum caso de vitória de algum jogador nas diagonais da matriz.
-def VerificaDiagonal(m, diagonal1_j, diagonal2_j, diagonal1_m, diagonal2_m):
+def VerificaDiagonal(m):
+
+    # Variáveis armazenadas em um dicionário, 2 para as possíveis diagonais de cada jogador.
+    diagonais = {
+        "j1": 0,
+        "j2": 0,
+        "m1": 0,
+        "m2": 0
+    }
+
     for i in range(0, 3, 1):
         for j in range(0, 3, 1):
 
             if m[i][j] == 1:
 
                 if i == j:
-                    diagonal1_j += 1
+                    diagonais["j1"] += 1
 
                 if (i == 0 and j == 2) or (i == 2 and j == 0) or (i == 1 and j == 1):
-                    diagonal2_j += 1
+                    diagonais["j2"] += 1
 
             elif m[i][j] == 2:
 
                 if i == j:
-                    diagonal1_m += 1
+                    diagonais["m1"] += 1
 
                 if (i == 0 and j == 2) or (i == 2 and j == 0) or (i == 1 and j == 1):
-                    diagonal2_m += 1
+                    diagonais["m2"] += 1
 
-    if diagonal1_j > 2 or diagonal2_j > 2:
+    if diagonais["j1"] > 2 or diagonais["j2"] > 2:
         resultado = "um"
         return resultado
 
-    elif diagonal1_m > 2 or diagonal2_m > 2:
+    elif diagonais["m1"] > 2 or diagonais["m2"] > 2:
         resultado = "dois"
         return resultado
 
@@ -185,3 +194,10 @@ def ImprimirMatriz(m):
     for i in range(0, 3, 1):
         print(m[i])
 
+
+def Break(resultado):
+
+    if (list(resultado.values())).__contains__("um"):
+        return "fim"
+    elif (list(resultado.values())).__contains__("dois"):
+        return "fim"
